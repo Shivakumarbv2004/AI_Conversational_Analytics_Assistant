@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+streamlit
+groq
+pandas
+numpy
+plotly
+python-dotenv
+pydantic
+httpx<0.28.0

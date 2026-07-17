@@ -1,0 +1,26 @@
+# Environments
+.env
+.venv/
+venv/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.gemini/
+
+# Output and logs
+*.log
+error_log.txt
+
+# OS generated files
+.DS_Store
+Thumbs.db
