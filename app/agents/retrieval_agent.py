@@ -4,19 +4,12 @@ from app.analytics.analytics_engine import AnalyticsEngine
 class RetrievalAgent:
 
     def __init__(self):
-
         self.engine = AnalyticsEngine()
 
-    def retrieve(self, plan):
-
-        tool = plan["tool"]
-
-        result = self.engine.execute(tool)
+    def retrieve(self, plan: dict):
+        result = self.engine.execute(plan)
 
         return {
-
-            "tool": tool,
-
+            "plan": plan,
             "result": result
-
         }
