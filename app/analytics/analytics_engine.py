@@ -83,14 +83,15 @@ class AnalyticsEngine(AnalyticsService):
             return f"Error executing query: {str(e)}"
 
     def _get_dashboard(self):
-        """Generates a comprehensive snapshot of the dataset."""
+        """Generates a comprehensive snapshot of the SaaS dataset."""
+        active_customers = self.df[self.df["churned"] == 0]
         return {
-            "Total Sales": self.df["sales"].sum(),
-            "Average Sale": self.df["sales"].mean(),
-            "Total Transactions": len(self.df),
-            "Average Rating": self.df["rating"].mean(),
-            "Best Product Line": self.df.groupby("product_line")["sales"].sum().idxmax(),
-            "Best Branch": self.df.groupby("branch")["sales"].sum().idxmax(),
-            "Best City": self.df.groupby("city")["sales"].sum().idxmax(),
-            "Preferred Payment": self.df["payment"].value_counts().idxmax(),
+            "Total Active MRR": active_customers["mrr"].sum().round(2),
+            "Overall Churn Rate (%)": (self.df["churned"].mean() * 100).round(2),
+            "Total Customers": len(self.df),
+            "Average CAC": self.df["cac"].mean().round(2),
+            "Top Acquisition Channel (by Volume)": self.df["acquisition_channel"].value_counts().idxmax(),
+            "Most Profitable Industry (Total MRR)": self.df.groupby("industry")["mrr"].sum().idxmax(),
+            "Average Support Tickets": self.df["support_tickets"].mean().round(2),
+            "Average Tenure (Months)": self.df["tenure_months"].mean().round(2),
         }

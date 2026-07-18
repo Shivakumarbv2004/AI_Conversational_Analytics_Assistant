@@ -10,4 +10,4 @@ MODEL = os.getenv(
     "llama-3.1-8b-instant"
 )
 
-DATASET_PATH = "data/supermarketanalysis.csv"
+DATASET_PATH = "data/saas_subscriptions.csv"

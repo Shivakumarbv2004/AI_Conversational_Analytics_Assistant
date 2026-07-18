@@ -62,7 +62,7 @@ with st.sidebar:
     st.title("About")
     st.info(
         "**AI Conversational Analytics Assistant**\n\n"
-        "Ask natural language questions about your Supermarket Sales dataset. "
+        "Ask natural language questions about your Enterprise SaaS Analytics dataset. "
         "Powered by an autonomous Multi-Agent system and Groq LLMs."
     )
     st.markdown("---")
@@ -70,7 +70,7 @@ with st.sidebar:
     st.markdown("- *'What are the total sales?'*\n- *'Which branch performed best?'*\n- *'How do people prefer to pay?'*\n- *'Give me an overview'*")
 
 # Main content
-st.title("AI Analytics Assistant 📈")
+st.title("Enterprise SaaS Analytics AI 📈")
 st.markdown("<p style='text-align: center; color: #555; font-size: 1.1rem;'>Instantly query your enterprise data with AI.</p>", unsafe_allow_html=True)
 
 # Initialize chat history
@@ -79,7 +79,7 @@ if "messages" not in st.session_state:
     # Add a welcoming initial message
     st.session_state.messages.append({
         "role": "assistant",
-        "content": "Hello! I am your AI Analytics Assistant. You can ask me anything about the Supermarket Sales data."
+        "content": "Hello! I am your AI Analytics Assistant. You can ask me anything about the Enterprise SaaS Analytics data."
     })
 
 # Display chat messages from history on app rerun
