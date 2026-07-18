@@ -62,20 +62,31 @@ class AnalyticsEngine(AnalyticsService):
             agg_column = self._match_col(df_view, plan.get("agg_column"))
             agg_method = plan.get("agg_method")
 
+            if agg_method:
+                agg_method = str(agg_method).lower().strip()
+                if agg_method in ["avg", "average"]:
+                    agg_method = "mean"
+
             if group_by and agg_column and agg_method:
                 # E.g. groupby(['City'])['Sales'].sum()
                 result = df_view.groupby(group_by)[agg_column].agg(agg_method)
                 
                 # Sort the results descending for better readability
-                if isinstance(result, pd.Series) or isinstance(result, pd.DataFrame):
-                    result = result.sort_values(ascending=False)
+                if isinstance(result, pd.Series):
+                    result = result.sort_values(ascending=False).head(20)
+                elif isinstance(result, pd.DataFrame):
+                    # For dataframes, sort by the first column
+                    sort_col = result.columns[0]
+                    result = result.sort_values(by=sort_col, ascending=False).head(20)
                     
             elif agg_column and agg_method:
                 # Global aggregation without grouping (e.g. total sales)
                 result = df_view[agg_column].agg(agg_method)
+                if isinstance(result, pd.Series) or isinstance(result, pd.DataFrame):
+                    result = result.head(20)
             else:
                 # If no aggregation requested, just return top rows or summary
-                result = df_view.head(10)
+                result = df_view.head(20)
 
             return result
 
